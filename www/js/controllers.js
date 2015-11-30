@@ -43,7 +43,7 @@ angular.module('stocksApp.controllers', [])
       {ticker: 'FB'},
       {ticker: 'NFLX'},
       {ticker: 'TSLA'},
-      {ticker: 'BBK-A'},
+      {ticker: 'BRK-A'},
       {ticker: 'MSFT'},
       {ticker: 'GE'},
       {ticker: 'BAC'},
@@ -53,14 +53,22 @@ angular.module('stocksApp.controllers', [])
 }])
 
 .controller('StockCtrl',['$scope','$stateParams', 'StockDataService',
-  function($scope, $stateParams, $StockDataService) {
+  function($scope, $stateParams, StockDataService) {
 
     $scope.ticker = $stateParams.stockTicker;
 
-    var promise = StockDataService.getPriceData($scope.ticker);
-
-    promise.then(function(data){
-      console.log(data);
+    $scope.$on('$ionicView.afterEnter', function(){
+      getPriceData();
     });
+
+    function getPriceData(){
+
+      var promise = StockDataService.getPriceData($scope.ticker);
+
+      promise.then(function(data){
+        console.log(data);
+      });
+    }
+
 
 }]);
