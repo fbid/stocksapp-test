@@ -52,8 +52,19 @@ angular.module('stocksApp.controllers', [])
     ];
 }])
 
-.controller('StockCtrl',['$scope','$stateParams',
-  function($scope, $stateParams) {
+.controller('StockCtrl',['$scope','$stateParams', '$http',
+  function($scope, $stateParams, $http) {
+
+
+    $http.get('http://finance.yahoo.com/webservice/v1/symbols/YHOO/quote?format=json&view=detail')
+      .then(
+        function success(jsonData){
+          console.log(jsonData.data.list.resources[0].resource.fields);
+        },
+        function error(err){
+          console.error('Error in the Yahoo request');
+        })
+    ;
 
     $scope.ticker = $stateParams.stockTicker;
 
