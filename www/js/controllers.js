@@ -52,14 +52,17 @@ angular.module('stocksApp.controllers', [])
     ];
 }])
 
-.controller('StockCtrl',['$scope','$stateParams', 'StockDataService',
-  function($scope, $stateParams, StockDataService) {
+.controller('StockCtrl',['$scope','$stateParams', 'StockDataService', 'DateService',
+  function($scope, $stateParams, StockDataService, DateService) {
 
     $scope.ticker = $stateParams.stockTicker;
 
     //
     //selezione del grafico attivo
     $scope.chartView = 1;
+
+    console.log(DateService.currentDate());
+    console.log(DateService.oneYearAgoDate());
 
     $scope.chartViewFunc = function(activeView){
       $scope.chartView = activeView;
