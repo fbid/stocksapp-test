@@ -57,6 +57,16 @@ angular.module('stocksApp.controllers', [])
 
     $scope.ticker = $stateParams.stockTicker;
 
+    //
+    //selezione del grafico attivo
+    $scope.chartView = 1;
+
+    $scope.chartViewFunc = function(activeView){
+      $scope.chartView = activeView;
+    };
+
+    //
+    //richiesta dei dati dello stock all'ingresso nella pagina
     $scope.$on('$ionicView.afterEnter', function(){
       getPriceData();
       getDetailsData();
@@ -67,7 +77,8 @@ angular.module('stocksApp.controllers', [])
       var promise = StockDataService.getPriceData($scope.ticker);
 
       promise.then(function(data){
-        console.log(data);
+        // console.log(data);
+        $scope.stockPriceData = data;
       });
     }
 
@@ -76,7 +87,8 @@ angular.module('stocksApp.controllers', [])
       var promise = StockDataService.getDetailsData($scope.ticker);
 
       promise.then(function(data){
-        console.log(data);
+        // console.log(data);
+        $scope.stockDetailsData = data;
       });
     }
 
