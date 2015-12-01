@@ -1,5 +1,7 @@
 angular.module('stocksApp', [
   'ionic',
+  'nvd3',
+  'nvChart',
   'stocksApp.controllers',
   'stocksApp.directives',
   'stocksApp.services',
